@@ -106,49 +106,81 @@ const CourseInfo = {
 
    let date1 = new Date();
    let date2 = new Date();
-
-   for (let i = 0; i < AssignmentGroup.assignments.length; i++) {
+   let grade = LearnerSubmissions[0].submission.score / AssignmentGroup.assignments[0].points_possible;
+   let grade1 = LearnerSubmissions[1].submission.score / AssignmentGroup.assignments[1].points_possible;
+   let avg = (LearnerSubmissions[0].submission.score + LearnerSubmissions[1].submission.score) /  (AssignmentGroup.assignments[0].points_possible + AssignmentGroup.assignments[1].points_possible) * 100;
+   let penalty = (LearnerSubmissions[0].submission.score - (AssignmentGroup.assignments[0].points_possible * .1)) / AssignmentGroup.assignments[0].points_possible;
+//    for (let i = 0; i < AssignmentGroup.assignments.length; i++) {
      
-           date1 = new Date(LearnerSubmissions[i].submission.submitted_at);
-           console.log(date1 + ' sd');
-           date2 = new Date(AssignmentGroup.assignments[i].due_at);
-           console.log(date2 + ' dd');
+//            date1 = new Date(LearnerSubmissions[i].submission.submitted_at);
+//            console.log(date1 + ' sd');
+//            date2 = new Date(AssignmentGroup.assignments[i].due_at);
+//            console.log(date2 + ' dd');
            
-           if (Date.parse(date2) === Date.parse(date1)) {
-                console.log(date2 + ' The assignment was turn on time.');
+//            if (Date.parse(date2) === Date.parse(date1)) {
+//                 console.log(date2 + ' The assignment was turn on time.');
                 
                 
            
             
-           }
+//            }
             
 
-           else if (Date.parse(date1) < Date.parse(date2)) {
+//            else if (Date.parse(date1) < Date.parse(date2)) {
 
-            console.log(date2 + ' The assignment is not due yet.');
+//             console.log(date2 + ' The assignment is not due yet.');
 
-           }
-           else if(Date.parse(date1) > Date.parse(date2)) {
-            console.log(date2 + ' The assignment late.');    
+//            }
+//            else if(Date.parse(date1) > Date.parse(date2)) {
+//             console.log(date2 + ' The assignment late.');    
 
 
-            }
+//             }
    
-        }
-    //   for (let s = 0; s < LearnerSubmissions.length; s++) {
+//         }
+
+    // let d = 0;
+
+    //     for (let s = 0; s < LearnerSubmissions.length; s++) {
   
-    //        date1 = new Date(LearnerSubmissions[s].submission.submitted_at);
-    //        console.log(date1 + ' sd');
-    //   }
-    //   for (let d = 0; d < AssignmentGroup.assignments.length; d++) {
+    //          date1 = new Date(LearnerSubmissions[s].submission.submitted_at);
+    //           console.log(date1 + ' sd');
+
+
+    //           do {
+    //             d++
+    //             date2 = new Date(AssignmentGroup.assignments[d].due_at);
+    //             console.log(date2 + ' dd');
+    //              if (d === AssignmentGroup.assignments.length) {
+                   
+                    
+    //                  break;
+    //              }
+                 
+    //         }while (d < AssignmentGroup.assignments.length);
+
+    //     }
+
+       
+    
+    
+    //    for (let d = 0; d < AssignmentGroup.assignments.length; d++) {
       
-    //        date2 = new Date(AssignmentGroup.assignments[d].due_at);
+    //         date2 = new Date(AssignmentGroup.assignments[d].due_at);
            
-    //        console.log(date2 + ' dd');
-    // }
+    //         console.log(date2 + ' dd');
+    //  }
 
-
+console.log(grade);
+console.log(grade1);
+console.log(avg);
+console.log(penalty);
     function bcCalc(CourseInfo,AssignmentGroup,LearnerSubmissions) {
+
+        if (CourseInfo.id  === AssignmentGroup.course_id) {
+            console.log('Good to go');
+            
+        }
         
     }
   
