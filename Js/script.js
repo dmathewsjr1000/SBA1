@@ -97,15 +97,7 @@ const CourseInfo = {
     return result;
   }
 
-  function gradeCalc(id , avg, grade, grade1, grade2) {
-
-    this.id = id;
-    this.avg = avg;
-    this.grade = grade;
-    this.grade1 = grade1;
-    this.grade2 = grade2;
-    
-}
+  
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
   console.log(result);
@@ -116,15 +108,58 @@ const CourseInfo = {
    let date1 = new Date();
    let date2 = new Date();
    let grade = LearnerSubmissions[0].submission.score / AssignmentGroup.assignments[0].points_possible;
-   let grade1 = LearnerSubmissions[1].submission.score / AssignmentGroup.assignments[1].points_possible;
+    let grade1 = LearnerSubmissions[1].submission.score / AssignmentGroup.assignments[1].points_possible;
    let avg = (LearnerSubmissions[0].submission.score + LearnerSubmissions[1].submission.score) /  (AssignmentGroup.assignments[0].points_possible + AssignmentGroup.assignments[1].points_possible) * 100;
    let penalty = (LearnerSubmissions[4].submission.score - (AssignmentGroup.assignments[1].points_possible * .1)) / AssignmentGroup.assignments[1].points_possible;
    
 console.log(penalty);
     
+ LearnerSubmissions.forEach(s => console.log(s.submission.score));
+ AssignmentGroup.assignments.forEach(d => console.log(d.points_possible));
+let d = 1;
+let result1 = LearnerSubmissions.find(el => el.assignment_id === d);
+let result2 = AssignmentGroup.assignments.find(el => el.id === d);
+let result3 = LearnerSubmissions.find(el => el.learner_id === 132 && el.assignment_id === d);
+ console.log(result3);
 
+function calc(AssignmentGroup, LearnerSubmissions) {
+  
+  
+    
+   
+  for (let i = 0; i < AssignmentGroup.assignments.length ; i++) {
+        date1 = new Date(LearnerSubmissions[i].submission.submitted_at);
+        date2 = new Date(AssignmentGroup.assignments[i].due_at);
+        for (let d = 1; d <= AssignmentGroup.assignments.length; d++) {
 
+          result1 = LearnerSubmissions.find(el => el.assignment_id === d);
+          result2 = AssignmentGroup.assignments.find(el => el.id === d);
+          result3 = LearnerSubmissions.find(el => el.learner_id === 132 && el.assignment_id === d);
+          console.log(result1, result2, result3);
+          if (d == 3) {
+            break;
+            
+          }
+        }
+        
+        if (Date.parse(date2) === Date.parse(date1)) {
+          console.log(date2 + ' The assignment was turn in on time. ' + date1);
+          return result1.submission.score / result2.points_possible;
+        } if (Date.parse(date1) < Date.parse(date2)) {
+          console.log(date2 + ' The assignment is not due yet. ' + date1);
+          continue;
+        } if(Date.parse(date1) > Date.parse(date2)) {
+                 penalty = (LearnerSubmissions[i].submission.score - (AssignmentGroup.assignments[i].points_possible * .1)) / AssignmentGroup.assignments[j].points_possible;   
+                  console.log(date2 + ' The assignment is late. ' + date1 + penalty);
+                  break;
+         }
+  }
+}       
 
+  // return result1.submission.score / result2.points_possible;
+  
+
+console.log(calc(AssignmentGroup, LearnerSubmissions));
 
 
 
@@ -151,23 +186,23 @@ console.log(penalty);
 
 
 
-   for (var i = 0; i < LearnerSubmissions.length; i++) {
-      for (var j = 0; j < AssignmentGroup.assignments.length; j++) {
-        date1 = new Date(LearnerSubmissions[i].submission.submitted_at);
-        date2 = new Date(AssignmentGroup.assignments[j].due_at);
-       if (Date.parse(date2) === Date.parse(date1)) {
-        console.log(date2 + ' The assignment was turn in on time. ' + date1);
-        // break;
-        }   if (Date.parse(date1) < Date.parse(date2)) {
-         console.log(date2 + ' The assignment is not due yet. ' + date1);
-         continue;
-       } if(Date.parse(date1) > Date.parse(date2)) {
-        // penalty = (LearnerSubmissions[0].submission.score - (AssignmentGroup.assignments[j].points_possible * .1)) / AssignmentGroup.assignments[j].points_possible;   
-                console.log(date2 + ' The assignment is late. ' + date1 + penalty);
-                break;
-       }
-      }
-   }
+  //  for (var i = 0; i < LearnerSubmissions.length; i++) {
+  //     for (var j = 0; j < AssignmentGroup.assignments.length; j++) {
+  //       date1 = new Date(LearnerSubmissions[i].submission.submitted_at);
+  //       date2 = new Date(AssignmentGroup.assignments[j].due_at);
+  //      if (Date.parse(date2) === Date.parse(date1)) {
+  //       console.log(date2 + ' The assignment was turn in on time. ' + date1);
+  //       // break;
+  //       }   if (Date.parse(date1) < Date.parse(date2)) {
+  //        console.log(date2 + ' The assignment is not due yet. ' + date1);
+  //        continue;
+  //      } if(Date.parse(date1) > Date.parse(date2)) {
+  //       // penalty = (LearnerSubmissions[0].submission.score - (AssignmentGroup.assignments[j].points_possible * .1)) / AssignmentGroup.assignments[j].points_possible;   
+  //               console.log(date2 + ' The assignment is late. ' + date1 + penalty);
+  //               break;
+  //      }
+  //     }
+  //  }
 //   for (let d = 0; d < AssignmentGroup.assignments.length; d++) {
 //     date2 = new Date(AssignmentGroup.assignments[d].due_at);
 //     console.log(date2 + ' dd');
